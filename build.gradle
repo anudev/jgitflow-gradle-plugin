@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-group = 'io.github.robwin'
+group = 'io.github.anudev'
 description = 'A JGitflow Gradle Plugin.'
 
 apply plugin: 'groovy'
@@ -80,14 +80,14 @@ artifacts {
 }
 
 pluginBundle {
-    website = 'https://github.com/RobWin/jgitflow-gradle-plugin'
-    vcsUrl = 'https://github.com/RobWin/jgitflow-gradle-plugin'
+    website = 'https://github.com/anudev/jgitflow-gradle-plugin'
+    vcsUrl = 'https://github.com/anudev/jgitflow-gradle-plugin'
     description = project.description
     tags = ['gitflow']
 
     plugins {
         swagger2MarkupPlugin {
-            id = 'io.github.robwin.jgitflow'
+            id = 'io.github.anudev.jgitflow'
             displayName = project.description
         }
     }
