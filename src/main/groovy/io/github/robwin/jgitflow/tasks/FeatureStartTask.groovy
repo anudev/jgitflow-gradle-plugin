@@ -29,7 +29,8 @@ class FeatureStartTask extends DefaultTask {
         String featureName = project.property('featureName')
         CredentialsProviderHelper.setupCredentialProvider(project)
         JGitFlow flow = JGitFlow.get(project.rootProject.rootDir)
-        flow.featureStart(featureName).call();
+        Boolean allowUntracked = project.property('allowUntracked')
+        flow.featureStart(featureName).setAllowUntracked(allowUntracked).call();
         flow.git().close()
     }
 }
