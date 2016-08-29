@@ -17,7 +17,9 @@
  *
  */
 package io.github.robwin.jgitflow.tasks
+
 import com.atlassian.jgitflow.core.JGitFlow
+import com.atlassian.jgitflow.core.command.FeaturePublishCommand
 import io.github.robwin.jgitflow.tasks.credentialsprovider.CredentialsProviderHelper
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -25,11 +27,17 @@ import org.gradle.api.tasks.TaskAction
 class FeaturePublishTask extends DefaultTask {
 
     @TaskAction
-    void publish(){
+    void publish() {
         String featureName = project.property('featureName')
         CredentialsProviderHelper.setupCredentialProvider(project)
         JGitFlow flow = JGitFlow.get(project.rootProject.rootDir)
-        flow.featurePublish(featureName).setPush(true).call();
+        FeaturePublishCommand publishCommand = flow.featurePublish(featureName)
+        if (project.hasProperty('allowUntracked')) {
+            Boolean allowUntracked = project.property('allowUntracked')
+            publishCommand.setAllowUntracked(allowUntracked)
+        }
+        publishCommand.setPush(true).call()
         flow.git().close()
     }
+
 }
